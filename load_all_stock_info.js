@@ -1,8 +1,11 @@
 /**
  * Created by HHF on 2016/1/22.
  */
-var http = require('http');
-var gbk = require('gbk');
+var http = require('http')
+    , gbk = require('gbk')
+    //, xpath = require('xpath')
+    //, dom = require('xmldom').DOMParser;
+    ,cheerio = require('cheerio');
 var SStock = {};
 
 SStock.loader = {
@@ -111,6 +114,15 @@ if (typeof Array.isArray === 'undefined') {
 
     SStock.on('html', function(data, url){
         console.info("=======" + url);
+        console.info("=======\n" + data);
+        //var doc = new dom().parseFromString(data)
+        //var nodes = xpath.select("//title", doc)
+
+
+        $ = cheerio.load(data);
+      $('ul li > a').each(function(i, e) {
+            console.log($(e).text()  + "  " + $(e).attr('href') );
+        });
     });
     for(index in urls){
         SStock.loader.load(urls[index]);

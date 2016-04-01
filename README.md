@@ -8,8 +8,10 @@ example installation:
 * npm install xpath
 * npm install xmldom
 * npm install gbk
-* npm install node-adodb
+* npm install cheerio
 * npm install colors
+* npm install node-adodb
+
 
 see 
 * https://www.npmjs.com/package/xpath
@@ -23,3 +25,9 @@ http://expressjs.com/en/guide/database-integration.html
 
 
 
+[using gbk module fixed GBK bug]
+
+
+[add 'sqlite3' module to save data ]
+@see http://blog.modulus.io/nodejs-and-sqlite
+@see https://www.npmjs.com/package/sqlite3

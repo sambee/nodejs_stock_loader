@@ -18,7 +18,7 @@ http.get(url, function(res) {
             pos += buffers[i].length;
         }
         // 'content-type': 'text/html;charset=gbk'
-        // °Ù¶È·µ»ØµÄÒ³ÃæÊı¾İÁ÷¾¹È»»¹ÎŞ·¨Ê¹ÓÃgbkÍêÈ«½âÂë¡£¡£
+        // ç™¾åº¦è¿”å›çš„é¡µé¢æ•°æ®æµç«Ÿç„¶è¿˜æ— æ³•ä½¿ç”¨gbkå®Œå…¨è§£ç ã€‚ã€‚
         //var gbk_to_utf8_iconv = new Iconv('GBK', 'UTF-8//TRANSLIT//IGNORE');
         //var utf8_buffer = gbk_to_utf8_iconv.convert(buffer);
         var utf8String = gbk.toString('utf-8', buffer);

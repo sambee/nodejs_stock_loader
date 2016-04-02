@@ -12,6 +12,8 @@ example installation:
 * npm install colors
 * npm install node-adodb
 
+npm install mocha
+npm test
 
 see 
 * https://www.npmjs.com/package/xpath
@@ -30,4 +32,6 @@ http://expressjs.com/en/guide/database-integration.html
 
 [add 'sqlite3' module to save data ]
 @see http://blog.modulus.io/nodejs-and-sqlite
-@see https://www.npmjs.com/package/sqlite3
+@see https://www.npmjs.com/package/sqlite3  https://github.com/mapbox/node-sqlite3/wiki/API
+https://github.com/zhs077/node-sqlite3
+

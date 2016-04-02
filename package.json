@@ -1,0 +1,22 @@
+{
+  "name": "nodejs_stock_loader",
+  "version": "1.0.0",
+  "description": "stock infomation loader.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://www.github.com/sambee/nodejs_stock_loader.git"
+  },
+  "keywords": [
+    "stock",
+    "nodejs",
+    "stock",
+    "stock",
+    "loader"
+  ],
+  "author": "haifeng huang",
+  "license": "ISC"
+}

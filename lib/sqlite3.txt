@@ -1,0 +1,28 @@
+1.常用
+sqlite3.exe stock.db
+sqlite>.help
+sqlite> create table mytable(name varchar(10), age smallint);
+sqlite> insert into mytable values("itech", 5);
+sqlite> insert into mytable values("jason", 10);
+sqlite> select * from mytable;
+sqlite> .tables //查看表及表的schema
+
+
+2.数据库导出为ascii的sql文件 + 重新导入到新的数据库
+export:
+c:\ echo .dump | sqlite3 test.db > test.db.dump 
+
+import:
+type test.db.dump | sqlite3 test2.db
+
+
+格式化输出
+
+sqlite> .mode column
+sqlite> .header on
+sqlite> select * from mytable;
+name        age
+----------  ----------
+itech       5
+jason       10
+sqlite> 

@@ -1,14 +1,14 @@
-1.³£ÓÃ
+1.å¸¸ç”¨
 sqlite3.exe stock.db
 sqlite>.help
 sqlite> create table mytable(name varchar(10), age smallint);
 sqlite> insert into mytable values("itech", 5);
 sqlite> insert into mytable values("jason", 10);
 sqlite> select * from mytable;
-sqlite> .tables //²é¿´±í¼°±íµÄschema
+sqlite> .tables //æŸ¥çœ‹è¡¨åŠè¡¨çš„schema
 
 
-2.Êı¾İ¿âµ¼³öÎªasciiµÄsqlÎÄ¼ş + ÖØĞÂµ¼Èëµ½ĞÂµÄÊı¾İ¿â
+2.æ•°æ®åº“å¯¼å‡ºä¸ºasciiçš„sqlæ–‡ä»¶ + é‡æ–°å¯¼å…¥åˆ°æ–°çš„æ•°æ®åº“
 export:
 c:\ echo .dump | sqlite3 test.db > test.db.dump 
 
@@ -16,7 +16,7 @@ import:
 type test.db.dump | sqlite3 test2.db
 
 
-¸ñÊ½»¯Êä³ö
+æ ¼å¼åŒ–è¾“å‡º
 
 sqlite> .mode column
 sqlite> .header on

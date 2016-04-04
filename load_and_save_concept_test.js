@@ -30,9 +30,9 @@ function loadDataProxy(request, responseArrayData) {
         });
         data.concept = str;
     })
-    stock.saveStockConcepts(responseArrayData, function (savedData) {
-       // console.info(JSON.stringify(savedData));
-        console.info("saved--->" + JSON.stringify(savedData));
+    stock.saveStockConcepts(responseArrayData, function (data) {
+
+        console.info("saved--->" + isLast +" " +idx + "/" + count + JSON.stringify(data));
         if(isLast == true){
            // process.exit(0);
             console.info("All data has been saved");

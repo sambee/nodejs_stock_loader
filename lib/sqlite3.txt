@@ -29,3 +29,130 @@ sqlite>
 
 3.get table columns metas
 PRAGMA table_info(table_name);
+
+
+
+1) 新建数据库
+$ sqlite3 test.db
+SQLite version 3.8.11.1 2015-07-29 20:00:57
+Enter ".help" for usage hints.
+sqlite>
+2) 数据库备份
+sqlite3 test.db .dump > test.sql //数据库备份
+或者
+
+sqlite> .output test.sql
+sqlite> .dump
+sqlite> .exit
+3) 导入一个备份
+sqlite3 test.db < test.sql
+4) 卸载将当前连接中的指定数据库
+sqlite> DETACH DATABASE mydb;
+5) ATTACH DATABASE语句
+添加另外一个数据库文件到当前的连接中,":memory:"为内存数据库。
+
+sqlite> ATTACH DATABASE '~/tmp/mydb.db' AS mydb;
+2.2 创建数据表
+1) 最简单的数据表
+sqlite> CREATE TABLE testtable (first_var integer);
+注意：testtable不要以sqlite_开头，因为该前缀定义的表名都用于sqlite内部.
+
+2) 创建带有缺省值的数据表
+sqlite> CREATE TABLE testtable (first_col integer DEFAULT 0, second_col varchar DEFAULT 'hello');
+3) 在指定数据库创建表
+sqlite> ATTACH DATABASE '~/tmp/mydb.db' AS mydb;//mydb.db不一定存在
+sqlite> CREATE TABLE mydb.testtable (first_col integer);
+4) IF NOT EXISTS从句
+如果你要创建的数据表已存在，则使用之前的创建表语句会发生错误，这就需要加上IF NOT EXISTS从句.
+
+sqlite> CREATE TABLE IF NOT EXISTS testtable (first_col integer);
+5) CREATE TABLE ... AS SELECT
+新创建的表将会包含SELECT查询返回的结果集的所有数据，但是不包含缺省值和主键等约束信息。
+
+sqlite> CREATE TABLE testtable2 AS SELECT * FROM testtable;
+sqlite> .schema testtable2
+CREATE TABLE testtable2(first_col INT);
+6) 主键约束:
+sqlite> CREATE TABLE testtable (first_col integer PRIMARY KEY ASC);//ASC
+联合主键
+
+sqlite> CREATE TABLE testtable2 (first integer, second integer, PRIMARY KEY (first_col,second_col));
+7) 唯一性约束
+sqlite> CREATE TABLE testtable (first_col integer UNIQUE);
+两个列的唯一性约束
+
+sqlite> CREATE TABLE testtable2 (first integer, second integer, UNIQUE (first_col,second_col));
+8) 为空(NOT NULL)约束
+sqlite> CREATE TABLE testtable(first_col integer NOT NULL);
+9) 检查性约束
+sqlite> CREATE TABLE testtable (first_col integer CHECK (first_col < 5));
+2.3 数据表的修改
+1) 修改表名
+SQLite中表名的修改只能在同一个数据库,表名被修改后,该表已存在的索引将不会受到影响,然而依赖该表的视图和触发器将不得不重新修改其定义。
+
+sqlite> ALTER TABLE testtable RENAME TO testtable2;
+2) 新增字段
+sqlite> ALTER TABLE testtable ADD COLUMN second_col integer;
+2.4 表的删除
+sqlite> DROP TABLE testtable;
+sqlite> DROP TABLE IF EXISTS testtable;
+2.5 插入数据
+sqlite> INSERT INTO testtable VALUES(2);
+2.6 显示数据表的数据
+为了增减输出的易读性
+
+sqlite> .echo on
+sqlite> .mode on
+sqlite> .headers on
+sqlite> .nullvalue NULL
+显示语法
+
+sqlite> SELECT * FROM testtablel;
+sqlite> SELECT fisrt FROM testtablel;
+2.7 数据表中数据的操作
+1) 更新数据表里的某些数据
+sqlite> UPDATE testtable SET first=2 WHERE ID = 1;
+2) 删除数据表中的全部数据
+sqlite> DROP FROM testtable;
+3) 删除数据表中的某些数据
+sqlite> DROP FROM testtable WHERE ID = 1 AND NAME = yxg;
+2.8 事务:
+如果没有为当前的SQL命令(SELECT除外)显示的指定事务,那么SQLite会自动为该操作添加一个隐式的事务,以保证该操作的原子性和一致性。
+
+sqlite> BEGIN TRANSACTION;
+sqlite> INSERT INTO testtable VALUES(1);
+sqlite> INSERT INTO testtable VALUES(2);
+sqlite> COMMIT TRANSACTION;--显示事务被提交,数据表中的数据也发生了变化。
+sqlite> SELECT COUNT(*) FROM testtable;
+COUNT(*)
+2
+sqlite> BEGIN TRANSACTION;
+sqlite> INSERT INTO testtable VALUES(1);
+sqlite> ROLLBACK TRANSACTION; --显示事务被回滚,数据表中的数据没有发生变化。
+sqlite> SELECT COUNT(*) FROM testtable;
+COUNT(*)
+2
+3、数据类型
+3.1 存储种类
+SQLite将数据值的存储划分为以下几种存储类型:
+NULL: 表示该值为NULL值。
+INTEGER: 无符号整型值。
+REAL: 浮点值。
+TEXT: 文本字符串,存储使用的编码方式为UTF-8、UTF-16BE、UTF-16LE。
+BLOB: 存储Blob数据,该类型数据和输入数据完全相同。
+
+3.2 比较表达式
+"=", "==", "<", "<=", ">", ">=", "!=", "<>", "IN", "NOT IN", "BETWEEN", "IS" and "IS NOT"。
+
+4、命令行工具
+.help //列出所有内置命令
+.tables TABLENAME //显示当前连接的数据库中的所有数据表，若指定表名，仅显示匹配的数据表，TABLENAME支持LIKE表达式。
+.backup ~/tmp/test.db //将当前连接中的缓存数据导出到本地文件。
+.schema //是sqlite3命令行工具的内置命令,用于显示当前数据表的CREATE TABLE语句。
+.exit //退出当前连接。
+.databases //列出当前链接中所有attached数据库名和文件名。
+.echo ON|OFF //打开或关闭显示输出。
+.header(s) ON|OFF //在显示SELECT结果时，是否显示列的标题。
+.import FILE TABLE //导入指定文件到指定表。
+.mode MODE TABLENAME //设置输出模式，常用为column，是SELECT输出列左对齐显示。
+.read FILENAME//执行指定文件内的SQL语句。

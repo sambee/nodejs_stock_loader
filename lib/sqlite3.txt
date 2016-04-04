@@ -25,4 +25,7 @@ name        age
 ----------  ----------
 itech       5
 jason       10
-sqlite> 
+sqlite>
+
+3.get table columns metas
+PRAGMA table_info(table_name);

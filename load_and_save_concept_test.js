@@ -15,7 +15,7 @@ function loadDataProxy(request, responseArrayData) {
     var count = request.count;
     var url = request.url;
     var isLast = (idx+1 == count);
-    console.info(request.name + "["  + isLast+"]" +  idx + "/" + count  + " "+ url);
+    // console.info(request.name + "["  + isLast+"]" +  idx + "/" + count  + " "+ url);
     each(responseArrayData, function (data, index) {
 
         data.tag = req.name;
@@ -30,11 +30,12 @@ function loadDataProxy(request, responseArrayData) {
         });
         data.concept = str;
     })
-    stock.saveStockInfos(responseArrayData, function (savedData) {
+    stock.saveStockConcepts(responseArrayData, function (savedData) {
        // console.info(JSON.stringify(savedData));
         console.info("saved--->" + JSON.stringify(savedData));
         if(isLast == true){
-            process.exit(0);
+           // process.exit(0);
+            console.info("All data has been saved");
         }
 
     });
@@ -44,23 +45,3 @@ stock.loadConcepts({
     success: loadDataProxy
 });
 
-// loadDataProxy({
-//     code:'1',
-//     name:'中文',
-//     description:'',
-//     href:'hhhhh'
-// }, {isLast:false});
-//
-// loadDataProxy({
-//     code:'2',
-//     name:'中文123',
-//     description:'',
-//     href:'hhhhh'
-// }, {isLast:false});
-//
-// loadDataProxy({
-//     code:'3',
-//     name:'中文333333',
-//     description:'',
-//     href:'hhhhh'
-// }, {isLast:true});

@@ -1,4 +1,4 @@
-var stock = require("./lib/stock_loader").sstock;
+var stock = require("./../lib/stock_loader").sstock;
 var colors = require('colors');
 
 var code = "600383";

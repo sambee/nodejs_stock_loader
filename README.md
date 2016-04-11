@@ -14,6 +14,8 @@ example installation:
 
 npm install mocha
 npm test
+npm install nodemailer --save
+npm install --save async
 
 see 
 * https://www.npmjs.com/package/xpath
@@ -42,3 +44,4 @@ http://expressjs.com/en/guide/database-integration.html
 * https://github.com/etpinard/plotlyjs-finance
 * https://github.com/Cloud9Trader/TechnicalIndicators
 * http://www.hcharts.cn/
+* https://www.npmjs.com/package/nodemailer

@@ -18,5 +18,9 @@
     "loader"
   ],
   "author": "haifeng huang",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "async": "^2.0.0-rc.3",
+    "nodemailer": "^2.3.1"
+  }
 }
